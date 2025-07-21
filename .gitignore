@@ -1,5 +1,6 @@
-# Data directory
+# Data directory - ignore everything except results
 data/
+!data/top_5_percent_homologs.csv
 
 # BLAST database files
 *.phr
