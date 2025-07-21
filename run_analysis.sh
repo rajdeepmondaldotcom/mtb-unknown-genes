@@ -25,14 +25,13 @@ else
     exit 1
 fi
 
-# Step 3: Format the Target Database
-echo "Formatting the Swiss-Prot database for BLAST..."
-makeblastdb -in swissprot -dbtype prot -parse_seqids -out swiss_prot_db
+# Step 3: The Swiss-Prot database is already formatted from update_blastdb.pl
+echo "Swiss-Prot database is ready for BLAST search..."
 
 # Step 4: Execute the BLAST Search
 echo "Running BLAST search (this may take some time)..."
 blastp -query mtb_h37rv_proteome.fasta \
-       -db swiss_prot_db \
+       -db swissprot \
        -out mtb_vs_swissprot.tsv \
        -evalue 1e-5 \
        -num_threads 8 \
@@ -42,6 +41,6 @@ cd ..
 
 # Step 5: Run the Python script to filter and analyze results
 echo "Processing BLAST results with Python..."
-python filter_blast_results.py
+python3 filter_blast_results.py
 
 echo "Analysis complete! Results are available in data/top_5_percent_homologs.csv" 
