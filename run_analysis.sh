@@ -5,8 +5,6 @@
 # This script executes the complete MTB homology analysis pipeline including
 # data download, database setup, BLAST search, and homology analysis.
 #
-# Author: MTB Research Team
-# License: MIT
 
 set -euo pipefail  # Exit on error, undefined vars, pipe failures
 
