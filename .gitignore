@@ -1,6 +1,9 @@
 # Data directory - ignore everything except results
 data/
-!data/top_5_percent_homologs.csv
+!data/mtb_homologs_top_5_percent.csv
+!data/mtb_homologs_top_10_percent.csv
+
+mtb_analysis.log
 
 # BLAST database files
 *.phr

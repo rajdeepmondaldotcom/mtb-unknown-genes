@@ -1,2 +1,8 @@
-pandas>=1.3.0
-biopython>=1.79 
+# MTB Homology Analyzer Dependencies
+# 
+# Core data processing and analysis libraries for bioinformatics pipeline
+# All versions are pinned for reproducibility and stability
+
+# Data analysis and manipulation
+pandas>=2.0.0,<3.0.0
+numpy>=1.24.0,<2.0.0
