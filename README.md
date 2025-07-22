@@ -15,12 +15,6 @@ This analyzer performs large-scale BLAST searches against Swiss-Prot and generat
 
 ## Features
 
-### Performance Optimizations
-- Raw file parsing for maximum throughput (bypasses BioPython overhead)
-- Intelligent caching system to avoid reprocessing
-- Vectorized operations using pandas for efficient data manipulation
-- Multi-threaded BLAST execution with configurable CPU utilization
-
 ### Comprehensive Analysis
 - Dual threshold analysis: Top 5% and 10% homology matches
 - Complete annotations including:
@@ -29,19 +23,11 @@ This analyzer performs large-scale BLAST searches against Swiss-Prot and generat
   - Detailed similarity metrics (identity, positives, E-value, bit score)
 - Zero missing data guarantee through robust error handling
 
-### Professional Architecture
-- Clean configuration management with centralized settings
-- Modular class-based design for maintainability
-- Automated environment setup with multi-platform support
-- Progress tracking and comprehensive logging
-
 ## System Requirements
 
 ### Hardware Requirements
 - Python 3.9 or higher
 - NCBI BLAST+ tools (blastp, makeblastdb, update_blastdb.pl)
-- Minimum 8 GB RAM (recommended for large datasets)
-- Minimum 50 GB free disk space (for databases and results)
 
 ### Software Dependencies
 - pandas >= 2.0.0
@@ -51,7 +37,7 @@ This analyzer performs large-scale BLAST searches against Swiss-Prot and generat
 
 ### Quick Setup
 ```bash
-git clone <repository-url>
+git clone https://github.com/rajdeepmondaldotcom/mtb-unknown-genes.git
 cd mtb-unknown-genes
 ./setup_environment.sh
 ```
@@ -134,99 +120,6 @@ Each CSV contains the following columns:
 - `data/cache/mtb_genes.pkl`: Cached MTB gene information
 - `data/cache/swissprot_annotations.pkl`: Cached Swiss-Prot annotations
 
-## Configuration
-
-### Performance Tuning
-Edit the `Config` class in `mtb_homology_analyzer.py`:
-
-```python
-class Config:
-    DATA_DIR = Path('data')
-    CACHE_DIR = DATA_DIR / 'cache'
-    
-    # BLAST parameters (configured in run_analysis.sh)
-    BLAST_THREADS = 8  # Adjust based on available CPU cores
-    BLAST_EVALUE = 1e-5  # E-value threshold
-```
-
-### Custom Thresholds
-Modify threshold percentages in the main execution logic:
-
-```python
-# Process custom thresholds
-analyzer.process_homology_results(3, mtb_gene_data, swissprot_annotations)  # Top 3%
-analyzer.process_homology_results(15, mtb_gene_data, swissprot_annotations) # Top 15%
-```
-
-## Technical Architecture
-
-### Core Components
-
-#### MTBHomologyAnalyzer
-- Main analysis engine with optimized processing methods
-- Regex pattern compilation for maximum performance
-- Memory-efficient parsing of large biological datasets
-- Comprehensive error handling and progress tracking
-
-#### Config
-- Centralized configuration management
-- Logical file path organization
-- BLAST output column mapping
-
-### Key Optimizations
-
-1. **Raw File Parsing**: Bypasses BioPython overhead for 3x speed improvement
-2. **Smart Caching**: Eliminates reprocessing of downloaded data
-3. **Vectorized Operations**: Utilizes pandas for efficient data manipulation
-4. **Memory Management**: Processes data in optimized chunks
-5. **Progress Tracking**: Provides real-time feedback on long-running operations
-
-## Performance Metrics
-
-### Typical Performance (8-core system)
-- MTB proteome processing: ~10 seconds
-- Swiss-Prot annotation extraction: ~5 minutes
-- Homology analysis: ~30 seconds per threshold
-- Total runtime: ~8 minutes (excluding BLAST search)
-
-### Resource Usage
-- Peak memory consumption: ~4 GB (during Swiss-Prot processing)
-- Cache file size: ~500 MB (reusable across runs)
-- Output file size: ~25 MB total
-
-## Troubleshooting
-
-### Common Issues
-
-#### BLAST+ Installation
-```bash
-# macOS with Homebrew
-brew install blast
-
-# Ubuntu/Debian
-sudo apt-get install ncbi-blast+
-
-# CentOS/RHEL
-sudo yum install ncbi-blast+
-```
-
-#### Memory Constraints
-- Reduce BLAST threads: `blastp -num_threads 4`
-- Clear cache files: `rm -rf data/cache/`
-- Increase system swap space
-
-#### Network Issues
-- Pre-download databases manually
-- Use local mirror for Swiss-Prot database
-- Implement retry logic for downloads
-
-### Debug Mode
-Enable verbose logging:
-
-```python
-import logging
-logging.basicConfig(level=logging.DEBUG)
-```
 
 ## Scientific Context
 
